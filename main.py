@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-import morse
 from morse import *
 
 PINK = "#e2979c"
@@ -16,11 +15,7 @@ global morse_code
 
 def call_conversor(text):
     global morse_code
-    # global window
-    print("text:")
-    print(text)
     morse_code = morse_converter(text)
-    print(morse_code)
     morse_output.config(text=morse_code)
 
 
@@ -34,37 +29,36 @@ def center_window():
     window.geometry('%dx%d+%d+%d' % (w_size, h_size, x, y))
 
 
+#Create windows
 window = tk.Tk()
 window.title("Text to Morse Code Converter")
 window.config(bg=YELLOW, height=h_size, width=w_size)
-# window.resizable(width=False, height=False)
 center_window()
 
-# text_label = tk.Label(window, text='Text to Convert', font=(FONT_NAME, 10, 'bold'))
-# text_label.grid(row=0, column=0)
-
-# Create Canvas
+#Create Canvas
 canvas = tk.Canvas(window, height=h_size, width=w_size, highlightthickness=0)
 canvas.pack()
 
-# Background set
+#Background set
 img = tk.PhotoImage(file="wallpaper.png")
-canvas.create_image(400, 300, image=img)
+canvas.create_image(w_size, h_size, image=img)
 
-# draw text
+#Draw Tittle
 i = canvas.create_text(w_size / 2, 50, text="Morse Converter", font=(FONT_NAME, 30, 'bold'), fill="black")
 r = canvas.create_rectangle(canvas.bbox(i), fill="gray")
 canvas.tag_lower(r, i)
 
-# Crear caja de texto.
+#Entry box
 entry = ttk.Entry(justify=tk.LEFT, width=60)
-# Posicionarla en la ventana.
 entry.place(x=10, y=h_size / 2)
+
+#Button
 button = ttk.Button(text="Convert to Morse", command=lambda: call_conversor(entry.get()))
 window.bind('<Return>', lambda event: call_conversor(entry.get()))
 button.place(x=w_size / 3, y=(h_size - h_size / 3))
+
+#Output
 morse_output = tk.Label(text='', font=(FONT_NAME, 10, 'bold'))
 morse_output.place(x=10, y=h_size - 25)
-
 
 window.mainloop()
