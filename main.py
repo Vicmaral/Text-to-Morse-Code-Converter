@@ -3,6 +3,8 @@ from tkinter import ttk
 
 from morse import *
 
+WHITE = "#ffffff"
+BLACK = "#000000"
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
@@ -10,11 +12,9 @@ YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
 h_size = 200
 w_size = 400
-global morse_code
 
 
 def call_conversor(text):
-    global morse_code
     morse_code = morse_converter(text)
     morse_output.config(text=morse_code)
 
@@ -44,8 +44,8 @@ img = tk.PhotoImage(file="wallpaper.png")
 canvas.create_image(w_size, h_size, image=img)
 
 #Draw Tittle
-i = canvas.create_text(w_size / 2, 50, text="Morse Converter", font=(FONT_NAME, 30, 'bold'), fill="black")
-r = canvas.create_rectangle(canvas.bbox(i), fill="gray")
+i = canvas.create_text(w_size / 2, 50, text="Morse Converter", font=(FONT_NAME, 30, 'bold'), fill=BLACK)
+r = canvas.create_rectangle(canvas.bbox(i), fill=GREEN)
 canvas.tag_lower(r, i)
 
 #Entry box
